@@ -1,0 +1,86 @@
+:root{
+    --background-color : #213555;
+    --cardbackground-color : #3E5879;
+    --secondary-color : #D8C4B6;
+    --ancent-color:#F5EFE7;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Merienda", cursive;
+}
+
+
+body{
+   background-color: var(--background-color);
+}
+
+
+
+.card-head{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card-head h1 {
+    margin-top: 25px;
+    margin-bottom: 20px;
+    color: white;
+    font-size: 24px;
+    font: poppins;
+}
+.card-head button{
+    color:var(--ancent-color);
+    background-color: var(--cardbackground-color);
+    display: block;
+    width: 15%;
+    border: none;
+    padding: 5px 3px;
+    border-radius: 8px;
+}
+
+.boxes{
+ display: flex;
+ flex-wrap: wrap;
+justify-content: space-between;
+gap: 25px;
+width: 600px;
+
+
+}
+
+.boxes > div {
+ width: 150px;
+ height: 150px;
+ margin: 5px;
+ background-color: white; 
+ border-radius: 8px; 
+ box-shadow: 2px 2px 5px 
+}
+
+.outer-box{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box-btns{
+    display:none;
+    position: relative;
+    top:120px;
+    left: 60px;
+}
+.box-btns button{
+    background-color: #3E5879;
+    border-radius: 5px;
+    color: #D8C4B6;
+}
+
+.box:hover .box-btns{
+    display: block;
+}

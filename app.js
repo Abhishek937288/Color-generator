@@ -1,41 +1,58 @@
-const generateBtnEl = document.querySelector("#generate-btn")
-const boxesEl = document.querySelectorAll(".box");
-const copyBtnEl = document.querySelectorAll("#copybtn");
-const setBgBtnEl = document.querySelectorAll("#setbgbtn");
-const card = document.querySelector(".card");
+const generateBtnEl = document.querySelector("#generate-btn");
+const containerEl = document.querySelector(".boxes");
 const body = document.body;
 
+function renderColorCards(len = 50) {
+  let html = "";
+  for (let i = 0; i < len; i++) {
+    const color = getRandomColor();
+    html += `<div class="box" style="background: ${color};">
+                <div class="box-btns">
+                  <button class="copy-btn" data-color-bg="${color}"><img src="./icons/copy.svg" alt="copy" /> </button> <button class="setbg-btn" data-color-bg="${color}"> <img src="./icons/bg.svg" alt="bg"/> </button> </div>
+              </div>`;
+  }
+
+  containerEl.innerHTML = html;
+}
+
+renderColorCards();
 
 function getRandomColor() {
-  const letters = '0123456789ABCDEF';
-  let color = '#';
-  for(let i = 0; i < 6; i++) {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * letters.length)];
   }
   return color;
 }
 
-
-generateBtnEl.addEventListener("click",()=>{
-    boxesEl.forEach((box)=>{
-        box.style.backgroundColor = getRandomColor();
-    })
+generateBtnEl.addEventListener("click", () => {
+  renderColorCards();
 });
 
-copyBtnEl.forEach((btn) =>{
-    btn.addEventListener("click",function(event){
-        const parent = this.parentElement.parentElement;
-        const color = parent.style.backgroundColor;
-        navigator.clipboard.writeText(color);
-   
-})});
+const copyBtnEl = document.querySelectorAll(".copy-btn");
+copyBtnEl.forEach((btn) => {
+  btn.addEventListener("click", function () {
+   const {colorBg} = btn.dataset;
+    navigator.clipboard.writeText(colorBg);
+    // Todo: when the use copy check for 1500 ms sec
+  });
+}); 
 
-setBgBtnEl.forEach((btn)=>{
-    btn.addEventListener("click",function(){
-         const parent = this.parentElement.parentElement;
-   const color = parent.style.backgroundColor;
-    body.style.backgroundColor = color;
-    })
+
+const setBgBtnEl = document.querySelectorAll(".setbg-btn");
+setBgBtnEl.forEach((btn) => {
+  btn.addEventListener("click", function () {
+   const {colorBg} = btn.dataset
+    body.style.backgroundColor = colorBg;
+  });
+});
+
+const boxesEl = document.querySelectorAll(".box");
+
+boxesEl.forEach((box)=>{
+  
+  box.addEventListener("mouseout", function(){
+    body.style.backgroundColor = "#0a121f";
+  });  
 })
-
-
